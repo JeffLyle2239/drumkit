@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">Bolton</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">Stannis</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">Arya</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">Priestess</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">Hodor</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">Tyrion</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">Tormund</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">Mance</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">Sandor</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/GOT1.mp3"></audio>
+  <audio data-key="83" src="sounds/agoodact.mp3"></audio>
+  <audio data-key="68" src="sounds/noname.mp3"></audio>
+  <audio data-key="70" src="sounds/thenight.mp3"></audio>
+  <audio data-key="71" src="sounds/holdthedoor.mp3"></audio>
+  <audio data-key="72" src="sounds/Idrink.mp3"></audio>
+  <audio data-key="74" src="sounds/noking.mp3"></audio>
+  <audio data-key="75" src="sounds/lightfire.mp3"></audio>
+  <audio data-key="76" src="sounds/wedie.mp3"></audio>
+
+<script>
+
+
+
+
+function playsound (e){
+const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+if(!audio) return;
+audio.currentTime = 0; 
+audio.play();
+key.classList.add('playing');
+}
+
+
+
+
+
+function removeTransition(e) {
+  if(e.propertyName !== 'transform') return;
+  this.classList.remove('playing');
+
+}
+
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+window.addEventListener('keydown', playsound);
+</script>
+
+
+</body>
+</html>
